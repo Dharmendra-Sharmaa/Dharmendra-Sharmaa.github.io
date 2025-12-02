@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>3D Portfolio Resume</title>
+  <style>
+    :root{
+      --bg:#05080f;
+      --card:#0c1322;
+      --accent:#7c3aed;
+      --muted:#9aa4b2;
+      --paper:#0f172a;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:Inter,system-ui,sans-serif;
+      background:radial-gradient(circle at 20% 20%, #0f1a2d, #05080f);
+      color:#e9edf5;
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    /* GLOBAL 3D SCENE */
+    .scene{
+      width:100%;
+      min-height:100vh;
+      perspective:1400px;
+      padding:40px 20px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    /* MAIN 3D CARD */
+    .card{
+      width:100%;
+      max-width:1080px;
+      background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));
+      padding:32px;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,0.06);
+      box-shadow:0 40px 100px rgba(0,0,0,0.6);
+      transform-style:preserve-3d;
+      transition:transform .4s ease;
+    }
+
+    /* HERO SECTION */
+    .hero{
+      display:flex;
+      align-items:center;
+      gap:30px;
+      flex-wrap:wrap;
+      justify-content:center;
+      text-align:center;
+      transform:translateZ(40px);
+    }
+
+    .avatar{
+      width:160px;
+      height:160px;
+      border-radius:20px;
+      background:linear-gradient(135deg,#7c3aed,#2dd4bf);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:46px;
+      font-weight:700;
+      color:white;
+      box-shadow:0 10px 40px rgba(0,0,0,0.5);
+      transform:translateZ(60px);
+    }
+
+    .hero-text h1{
+      font-size:36px;
+      font-weight:800;
+    }
+    .hero-text p{
+      margin-top:8px;
+      font-size:16px;
+      color:var(--muted);
+    }
+
+    /* 3D SECTIONS */
+    .section{
+      margin-top:40px;
+      padding:24px;
+      background:rgba(255,255,255,0.02);
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.05);
+      transform:translateZ(20px);
+    }
+    .section h2{
+      font-size:22px;
+      margin-bottom:14px;
+      letter-spacing:0.5px;
+    }
+
+    .project{
+      margin-top:16px;
+      padding:16px;
+      border-radius:12px;
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.05);
+    }
+    .project h3{
+      margin-bottom:6px;
+      font-size:18px;
+    }
+
+    /* SKILLS */
+    .skills{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+    .skill{
+      background:rgba(255,255,255,0.05);
+      padding:6px 12px;
+      border-radius:20px;
+      font-size:14px;
+    }
+
+    /* MOBILE */
+    @media(max-width:600px){
+      .hero-text h1{font-size:26px}
+      .avatar{width:120px;height:120px;font-size:32px}
+      .section{padding:18px}
+    }
+  </style>
+</head>
+<body>
+  <div class="scene" id="scene">
+
+    <div class="card" id="card">
+
+      <div class="hero">
+        <div class="avatar">JD</div>
+        <div class="hero-text">
+          <h1>John Doe</h1>
+          <p>Full‑Stack Developer • 3D Web Enthusiast • Mobile‑Friendly UI/UX</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>About Me</h2>
+        <p>Developer with 8+ years of experience building immersive interfaces, responsive layouts, and interactive 3D web experiences using WebGL, Three.js, and modern frontend technologies.</p>
+      </div>
+
+      <div class="section">
+        <h2>Featured Projects</h2>
+
+        <div class="project">
+          <h3>3D Interactive Portfolio</h3>
+          <p>Built a WebGL‑powered 3D personal site with layered motion, dynamic depth, and mobile support.</p>
+        </div>
+
+        <div class="project">
+          <h3>AI Resume Generator</h3>
+          <p>A smart resume builder powered by machine learning and real‑time content scoring.</p>
+        </div>
+
+        <div class="project">
+          <h3>Ultra‑Fast UI Framework</h3>
+          <p>Lightweight component library optimized for 60fps animations and rich visuals.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Skills</h2>
+        <div class="skills">
+          <span class="skill">React</span>
+          <span class="skill">Three.js</span>
+          <span class="skill">WebGL</span>
+          <span class="skill">TypeScript</span>
+          <span class="skill">Node.js</span>
+          <span class="skill">Responsive UI</span>
+          <span class="skill">Animations</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    const card = document.getElementById("card");
+    const scene = document.getElementById("scene");
+
+    // Desktop: 3D tilt
+    scene.addEventListener("mousemove", (e) => {
+      if (window.innerWidth < 700) return;
+      const rect = scene.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateY = ((x - centerX) / centerX) * 10;
+      const rotateX = -((y - centerY) / centerY) * 10;
+
+      card.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+    });
+
+    scene.addEventListener("mouseleave", () => {
+      card.style.transform = "rotateY(0deg) rotateX(0deg)";
+    });
+
+    // MOBILE: subtle parallax on scroll
+    window.addEventListener("scroll", () => {
+      if (window.innerWidth > 700) return;
+      const scrollY = window.scrollY;
+      card.style.transform = `translateY(${scrollY * 0.1}px)`;
+    });
+  </script>
+</body>
+</html>
