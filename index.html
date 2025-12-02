@@ -1,282 +1,135 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Space Portfolio — Interactive 3D & Motion</title>
-  <meta name="description" content="Space themed portfolio with 3D keyboard, GSAP animations, particles, responsive layout." />
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-      --bg:#071025; /* deep space */
-      --glass: rgba(255,255,255,0.04);
-      --accent:#7b67ff;
-      --muted: #9aa7bf;
-      --glass-2: rgba(255,255,255,0.03);
-      --card: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-    }
-
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;background:radial-gradient(ellipse at 10% 10%, rgba(123,103,255,0.08) 0%, transparent 20%), var(--bg); color:#e6f0ff}
-
-    /* Particle canvas sits behind everything */
-    #particles{position:fixed;left:0;top:0;width:100%;height:100%;z-index:0;pointer-events:none}
-
-    .site{
-      min-height:100vh;
-      position:relative;
-      z-index:1;
-      display:flex;
-      flex-direction:column;
-      gap:64px;
-      padding:48px 10vw;
-    }
-
-    header{
-      display:flex;align-items:center;justify-content:space-between;gap:20px;
-    }
-    .logo{display:flex;align-items:center;gap:12px}
-    .logo .mark{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#4dd0e1);display:flex;align-items:center;justify-content:center;font-weight:800;color:#031024}
-    nav a{color:var(--muted);text-decoration:none;margin-left:18px;font-weight:600}
-
-    /* Hero */
-    .hero{display:grid;grid-template-columns:1fr 520px;gap:48px;align-items:center}
-    .intro h1{font-size:clamp(2rem,4vw,3rem);margin:0 0 12px}
-    .intro p{color:var(--muted);margin:0 0 20px;line-height:1.6}
-    .cta{display:flex;gap:12px}
-    .btn{background:var(--accent);border:none;padding:12px 16px;border-radius:10px;color:#031024;font-weight:700;cursor:pointer}
-    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
-
-    /* 3D area placeholder */
-    .spline-wrap{background:var(--glass);border-radius:16px;padding:18px;display:flex;align-items:center;justify-content:center;min-height:360px;backdrop-filter: blur(6px);box-shadow: 0 10px 30px rgba(2,6,23,0.6)}
-    .spline-iframe{width:100%;height:100%;border-radius:8px;border:0}
-
-    /* Keycaps grid (fallback/interactive mock) */
-    .keyboard{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:16px}
-    .key{background:var(--card);border-radius:12px;padding:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100px;transition:transform .35s cubic-bezier(.2,.9,.3,1), box-shadow .35s;transform-style:preserve-3d;cursor:pointer}
-    .key:hover{transform:translateY(-10px) rotateX(8deg);box-shadow:0 18px 40px rgba(7,16,37,0.6)}
-    .key .skill{font-weight:700;margin-top:10px}
-    .key .desc{color:var(--muted);font-size:13px;text-align:center;margin-top:6px}
-
-    /* Features list */
-    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-    .feature{background:var(--glass-2);padding:18px;border-radius:12px}
-    .feature h3{margin:0 0 8px}
-    .techstack{display:flex;flex-wrap:wrap;gap:10px}
-    .chip{padding:8px 10px;border-radius:999px;background:rgba(255,255,255,0.03);font-weight:600}
-
-    footer{padding:28px 10vw;border-top:1px solid rgba(255,255,255,0.03);color:var(--muted)}
-
-    /* Responsive */
-    @media (max-width:1000px){
-      .hero{grid-template-columns:1fr;}
-      .spline-wrap{min-height:300px}
-      .features{grid-template-columns:1fr}
-      header{flex-direction:column;align-items:flex-start;gap:12px}
-    }
-
-    @media (max-width:520px){
-      .site{padding:28px}
-      .keyboard{grid-template-columns:repeat(2,1fr)}
-    }
-
-    /* Small helpers */
-    .muted{color:var(--muted)}
-
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Turning Vision Into Reality</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <!-- Font Awesome for social icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
-
-<canvas id="particles"></canvas>
-
-<main class="site">
-  <header>
-    <div class="logo">
-      <div class="mark">SP</div>
-      <div>
-        <div style="font-weight:800">Space Portfolio</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:2px">3D interactions · GSAP · Framer Motion</div>
+  <header class="site-header">
+    <nav class="nav">
+      <a href="#" class="logo">DV</a>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#articles">Articles</a></li>
+      </ul>
+      <div class="nav-actions">
+        <div class="socials">
+          <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+          <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+          <a href="#" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+        </div>
+        <button id="themeToggle" class="toggle" aria-label="Toggle dark mode">
+          <i class="fa-solid fa-moon"></i>
+        </button>
       </div>
-    </div>
-    <nav>
-      <a href="#work">Work</a>
-      <a href="#features">Features</a>
-      <a href="#tech">Tech</a>
-      <a href="#contact">Contact</a>
     </nav>
   </header>
 
-  <section class="hero">
-    <div class="intro">
-      <h1>🔥 Features — Interactive 3D & Motion-forward Portfolio</h1>
-      <p>From 3D interactives to buttery smooth motion, this portfolio showcases modern web design using Spline, GSAP, and Framer Motion. A spacey background, responsive layout and delightful micro-interactions create an immersive experience.</p>
-      <div class="cta">
-        <button class="btn">View Case Study</button>
-        <button class="btn ghost">Get in touch</button>
-      </div>
-
-      <div style="margin-top:28px">
-        <h3 class="muted">Quick preview</h3>
-        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
-          <div class="feature">
-            <h3>🎹 3D Interactive Animations</h3>
-            <div class="muted">Interactive keyboard built with Spline — each keycap is a skill card with hover reveals.</div>
-          </div>
-          <div class="feature">
-            <h3>✨ Slick Interactions</h3>
-            <div class="muted">GSAP & Framer Motion power scroll and hover animations for delightful storytelling.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <aside>
-      <div class="spline-wrap">
-        <!--
-          Replace the iframe src with your published Spline scene or use Spline Runtime.
-          Example embed (replace with your scene URL):
-          <iframe class="spline-iframe" src="https://my.spline.design/your-scene/embed" />
-        -->
-        <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:var(--muted)">
-          <div style="font-weight:700">3D Keyboard (Spline)</div>
-          <div style="font-size:13px;margin-top:8px">(Spline scene placeholder — embed your scene or use Spline Runtime)</div>
-
-          <!-- Fallback interactive keyboard built with HTML/CSS -->
-          <div class="keyboard" style="margin-top:16px">
-            <div class="key" onclick="openSkill('GSAP')">
-              <div class="skill">GSAP</div>
-              <div class="desc">Animations & scroll</div>
-            </div>
-            <div class="key" onclick="openSkill('Framer Motion')">
-              <div class="skill">Framer Motion</div>
-              <div class="desc">React motion library</div>
-            </div>
-            <div class="key" onclick="openSkill('Spline')">
-              <div class="skill">Spline</div>
-              <div class="desc">3D scene & interactions</div>
-            </div>
-            <div class="key" onclick="openSkill('Responsive')">
-              <div class="skill">Responsive</div>
-              <div class="desc">Mobile-first design</div>
-            </div>
-          </div>
-
-        </div>
+  <main id="home" class="hero">
+    <!-- Left: Hire me badge -->
+    <aside class="badge">
+      <div class="badge-ring">
+        <p>UI/UX Designer • Web Developer</p>
+        <a class="btn-primary small" href="#contact">Hire Me</a>
       </div>
     </aside>
+
+    <!-- Center: Headline, description, actions -->
+    <section class="hero-content">
+      <h1 class="hero-title">Turning Vision Into Reality With Code And Design</h1>
+      <p class="hero-subtitle">
+        As a skilled full-stack developer, I am dedicated to turning ideas into innovative web applications.
+        Explore my latest projects and articles, showcasing my expertise in React.js and web development.
+      </p>
+      <div class="hero-cta">
+        <a class="btn-primary" href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a class="btn-outline" href="#contact">Contact</a>
+      </div>
+    </section>
+
+    <!-- Right: Illustration + lightbulb -->
+    <section class="hero-visual">
+      <!-- Stylized profile illustration (SVG placeholder) -->
+      <div class="illustration">
+        <svg viewBox="0 0 320 360" xmlns="http://www.w3.org/2000/svg" aria-label="Profile illustration">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#6EE7B7"/>
+              <stop offset="100%" stop-color="#3B82F6"/>
+            </linearGradient>
+            <linearGradient id="g2" x1="1" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#F472B6"/>
+              <stop offset="100%" stop-color="#F59E0B"/>
+            </linearGradient>
+          </defs>
+          <!-- Abstract splash shapes -->
+          <circle cx="90" cy="90" r="80" fill="url(#g1)" opacity="0.35"/>
+          <circle cx="230" cy="140" r="70" fill="url(#g2)" opacity="0.35"/>
+          <!-- Head silhouette -->
+          <path d="M160 60c-35 0-60 25-60 60 0 28 14 43 18 55 5 14-5 24-5 38 0 24 18 42 47 42s47-18 47-42c0-14-10-24-5-38 4-12 18-27 18-55 0-35-25-60-60-60z"
+                fill="#1F2937"/>
+          <!-- Neck and shirt -->
+          <rect x="145" y="215" width="30" height="25" rx="8" fill="#374151"/>
+          <path d="M90 260h140c10 0 18 8 18 18v32H72v-32c0-10 8-18 18-18z" fill="#111827"/>
+        </svg>
+      </div>
+
+      <!-- Lightbulb icon (SVG placeholder) -->
+      <div class="bulb">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-label="Idea lightbulb">
+          <path d="M32 8c-9.9 0-18 8.1-18 18 0 6.7 4.1 12.8 9.3 15.6l.7 4.4h16l.7-4.4C45.9 38.8 50 32.7 50 26c0-9.9-8.1-18-18-18z"
+                fill="#F59E0B"/>
+          <rect x="24" y="46" width="16" height="6" rx="2" fill="#374151"/>
+          <rect x="24" y="54" width="16" height="4" rx="2" fill="#9CA3AF"/>
+          <circle cx="14" cy="14" r="2" fill="#FCD34D"/>
+          <circle cx="50" cy="10" r="2" fill="#FCD34D"/>
+          <circle cx="54" cy="30" r="2" fill="#FCD34D"/>
+        </svg>
+      </div>
+    </section>
+  </main>
+
+  <section id="about" class="section">
+    <h2>About</h2>
+    <p>I’m a full-stack developer focused on React, Node, and delightful UX. I ship fast, iterate smarter, and design with intent.</p>
   </section>
 
-  <section id="features">
-    <h2>Highlights</h2>
-    <div class="features" style="margin-top:16px">
-      <div class="feature">
-        <h3>🌌 Space-Themed Design</h3>
-        <p class="muted">Dark cosmic background, subtle gradients and floating particles give a futuristic feel.</p>
-      </div>
-      <div class="feature">
-        <h3>📱 Responsive Design</h3>
-        <p class="muted">Optimized for mobile and desktop — touch-friendly interactions and accessible layout.</p>
-      </div>
-      <div class="feature">
-        <h3>🧠 Innovative Web Design</h3>
-        <p class="muted">Combining 3D, motion, and micro-interactions to elevate storytelling.</p>
-      </div>
-      <div class="feature">
-        <h3>🛠️ Tech Stack</h3>
-        <div class="techstack" style="margin-top:8px">
-          <span class="chip">Next.js</span>
-          <span class="chip">React</span>
-          <span class="chip">Tailwind CSS</span>
-          <span class="chip">Shadcn</span>
-          <span class="chip">GSAP</span>
-          <span class="chip">Framer Motion</span>
-          <span class="chip">Spline Runtime</span>
-          <span class="chip">Socket.io</span>
-          <span class="chip">Resend</span>
-          <span class="chip">Zod</span>
-        </div>
-      </div>
+  <section id="projects" class="section">
+    <h2>Projects</h2>
+    <div class="grid">
+      <article class="card"><h3>Project One</h3><p>Short description of a featured project.</p></article>
+      <article class="card"><h3>Project Two</h3><p>Short description of a featured project.</p></article>
+      <article class="card"><h3>Project Three</h3><p>Short description of a featured project.</p></article>
     </div>
   </section>
 
-  <section id="tech">
-    <h2>How to integrate (notes)</h2>
-    <div style="margin-top:12px;color:var(--muted);line-height:1.6">
-      <ul>
-        <li><strong>Spline:</strong> Publish your scene and embed via &lt;iframe&gt; or use the Spline Runtime in React for more control and per-key interactions.</li>
-        <li><strong>GSAP:</strong> Use the CDN for prototypes (<code>https://cdnjs.cloudflare.com/ajax/libs/gsap/3.x/gsap.min.js</code>) or npm for production. Great for timeline and scroll-triggered reveal animations.</li>
-        <li><strong>Framer Motion:</strong> Used inside React components (Next.js). Replace the HTML-based hover animations with motion components for richer interactions.</li>
-        <li><strong>Particles:</strong> This page includes a lightweight canvas particle system (below) which you can tune or swap for tsParticles.</li>
-      </ul>
-    </div>
+  <section id="articles" class="section">
+    <h2>Articles</h2>
+    <ul class="list">
+      <li><a href="#">Design systems that ship</a></li>
+      <li><a href="#">React performance in the real world</a></li>
+      <li><a href="#">Product thinking for engineers</a></li>
+    </ul>
   </section>
 
-  <section id="contact">
+  <section id="contact" class="section">
     <h2>Contact</h2>
-    <p class="muted">Want this built as a Next.js + Tailwind project or need the Spline scene embedded? Tell me which option you'd like and I'll export the code for that stack.</p>
-    <div style="margin-top:12px">
-      <button class="btn">Email me</button>
-      <button class="btn ghost">Download Resume</button>
-    </div>
+    <p>Open to freelance, consulting, and collaborations. Reach me via email or LinkedIn.</p>
   </section>
 
-  <footer>
-    <div>© <span id="year"></span> Space Portfolio — Built with modern web tech. </div>
+  <footer class="site-footer">
+    <p>© 2025 Your Name. Built with ❤️ and curiosity.</p>
   </footer>
-</main>
 
-<script>
-  // Set year
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Small skill click handler (demo)
-  function openSkill(name){
-    alert(name + ' — Click to customize with Spline or link to case study.');
-  }
-
-  /* Basic canvas particles (lightweight) */
-  const canvas = document.getElementById('particles');
-  const ctx = canvas.getContext('2d');
-  let w = canvas.width = innerWidth;
-  let h = canvas.height = innerHeight;
-  const parts = [];
-  function rand(min,max){return Math.random()*(max-min)+min}
-  for(let i=0;i<120;i++){
-    parts.push({x:rand(0,w),y:rand(0,h),vx:rand(-0.2,0.6),vy:rand(-0.1,0.2),r:rand(0.4,1.8),alpha:rand(0.06,0.25)})
-  }
-  function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight}
-  addEventListener('resize',resize);
-  function draw(){
-    ctx.clearRect(0,0,w,h);
-    for(const p of parts){
-      p.x += p.vx; p.y += p.vy;
-      if(p.x> w+20) p.x = -20; if(p.x < -20) p.x = w+20;
-      if(p.y> h+20) p.y = -20; if(p.y < -20) p.y = h+20;
-      ctx.beginPath(); ctx.globalAlpha = p.alpha; ctx.fillStyle = 'white'; ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
-    }
-    ctx.globalAlpha = 1;
-    requestAnimationFrame(draw);
-  }
-  draw();
-
-  /* Tiny GSAP-like demo using IntersectionObserver for simple reveals (no external lib needed).
-     For prototyping, use GSAP CDN and ScrollTrigger for more advanced control. */
-  const reveals = document.querySelectorAll('.feature, .spline-wrap, .keyboard, .intro');
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.style.transform = 'translateY(0)';
-        e.target.style.opacity = 1;
-      }
-    });
-  },{threshold:0.12});
-  reveals.forEach(r=>{r.style.transform='translateY(20px)';r.style.opacity=0;io.observe(r)});
-
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
