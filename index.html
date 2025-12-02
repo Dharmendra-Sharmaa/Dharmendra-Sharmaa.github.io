@@ -1,164 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Adward Allam - Portfolio</title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio – Dummy Developer</title>
+
+<style>
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: #f8f9fa;
     }
-    header {
-      background-color: #222;
-      color: white;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+
+    /* NAVBAR */
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 60px;
+        background: #ffffff;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-    nav a {
-      color: white;
-      margin: 0 1rem;
-      text-decoration: none;
-      font-weight: bold;
+
+    nav .logo {
+        font-weight: 700;
+        font-size: 22px;
+        color: #1d72ff;
     }
-    .social-icons img {
-      width: 24px;
-      margin-left: 10px;
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 30px;
     }
+
+    nav ul li a {
+        text-decoration: none;
+        font-weight: 500;
+        color: #333;
+    }
+
+    /* HERO */
     .hero {
-      display: flex;
-      align-items: center;
-      padding: 2rem;
-      background-color: #fff;
+        display: flex;
+        align-items: center;
+        padding: 60px;
+        gap: 40px;
+        background: white;
     }
+
+    .hero h1 {
+        font-size: 38px;
+        font-weight: 700;
+    }
+
+    .hero h1 span {
+        color: #1d72ff;
+    }
+
+    .hero p {
+        width: 80%;
+        color: #555;
+    }
+
+    .hero button {
+        background: #1d72ff;
+        padding: 12px 26px;
+        border: none;
+        color: white;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
     .hero img {
-      width: 300px;
-      border-radius: 10px;
-      margin-right: 2rem;
+        width: 320px;
+        border-radius: 20px;
     }
-    .hero-text h1 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
+
+    /* SKILLS */
+    .skills {
+        padding: 40px;
+        background: #ffffff;
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
     }
-    .hero-text p {
-      margin: 0.5rem 0;
+
+    .skills img {
+        width: 50px;
+        opacity: 0.8;
     }
-    .badges {
-      margin-top: 1rem;
+
+    /* ABOUT */
+    .about {
+        text-align: center;
+        padding: 60px 30px;
     }
-    .badge {
-      background-color: #eee;
-      padding: 0.5rem 1rem;
-      margin-right: 1rem;
-      border-radius: 5px;
-      display: inline-block;
+
+    .about h2 {
+        font-size: 28px;
+        color: #1d72ff;
     }
-    .tech-icons img {
-      width: 40px;
-      margin: 10px;
+
+    .about-section {
+        display: flex;
+        padding: 40px;
+        justify-content: space-around;
+        align-items: center;
     }
-    .section {
-      padding: 2rem;
-      background-color: #fff;
-      margin: 1rem 0;
+
+    .about-section img {
+        width: 300px;
+        border-radius: 20px;
     }
-    .section h2 {
-      margin-bottom: 1rem;
+
+    .stats {
+        text-align: left;
+        width: 40%;
     }
-    .about img {
-      width: 200px;
-      border-radius: 10px;
-      margin-right: 2rem;
+
+    .stats h3 {
+        color: #1d72ff;
+        margin-top: 0;
     }
-    .about-content {
-      display: flex;
-      align-items: center;
+
+    .stat-box {
+        margin-bottom: 20px;
     }
-    .buttons a {
-      display: inline-block;
-      margin: 1rem 1rem 0 0;
-      padding: 0.5rem 1rem;
-      background-color: #222;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
+
+    /* FOOTER */
+    footer {
+        text-align: center;
+        padding: 20px;
+        background: #1d72ff;
+        color: white;
+        margin-top: 40px;
     }
-  </style>
+</style>
+
 </head>
+
 <body>
 
-<header>
-  <div>
-    <strong>Adward Allam</strong>
-  </div>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Testimonial</a>
-    <a href="#">Projects</a>
-    <a href="#">Contact</a>
-  </nav>
-  <div class="social-icons">
-    <img src="https://via.placeholder.com/24?text=F" alt="Facebook"/>
-    <img src="https://via.placeholder.com/24?text=I" alt="Instagram"/>
-    <img src="https://via.placeholder.com/24?text=G" alt="GitHub"/>
-  </div>
-</header>
+<!-- NAVBAR -->
+<nav>
+    <div class="logo">Dummy Dev</div>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
 
-<section class="hero">
-  <img src="https://via.placeholder.com/300x400?text=Adward" alt="Adward Allam"/>
-  <div class="hero-text">
-    <h1>Hey! 👋 I am Adward Allam</h1>
-    <p>I have an experience of over 8+ years of working on different stacks. I helped clients to get more than 50+ Million for their business.</p>
-    <button onclick="alert('Getting Started!')">Get Started</button>
-    <div class="badges">
-      <span class="badge">Upwork: 5.0 ★★★★★ Top Rated Seller</span>
-      <span class="badge">Fiverr: 5.0 ★★★★★ Top Rated Seller</span>
-    </div>
-    <div class="tech-icons">
-      <img src="https://via.placeholder.com/40?text=Mongo" alt="MongoDB"/>
-      <img src="https://via.placeholder.com/40?text=HTML" alt="HTML"/>
-      <img src="https://via.placeholder.com/40?text=Python" alt="Python"/>
-      <img src="https://via.placeholder.com/40?text=JS" alt="JavaScript"/>
-      <img src="https://via.placeholder.com/40?text=CSS" alt="CSS"/>
-      <img src="https://via.placeholder.com/40?text=Laravel" alt="Laravel"/>
-    </div>
-  </div>
-</section>
-
-<section class="section about">
-  <h2>About Me</h2>
-  <div class="about-content">
-    <img src="https://via.placeholder.com/200x250?text=Adward" alt="Adward"/>
+<!-- HERO SECTION -->
+<section class="hero" id="home">
     <div>
-      <h3>Things you should know before starting!</h3>
-      <ul>
-        <li><strong>Education:</strong> Dummy University, B.Tech in Computer Science</li>
-        <li><strong>Experience:</strong> 1000+ Projects Completed, 9+ Years Of Experience, 500+ Happy Clients</li>
-        <li><strong>Interests:</strong> Coding, Design, AI, Teaching</li>
-      </ul>
-      <p>I have an experience of over 8+ years of working on different stacks. I helped clients to get more than 50+ Million for their business. (Repeated for demo)</p>
-      <div class="buttons">
-        <a href="#">Download CV</a>
-        <a href="#">GitHub</a>
-      </div>
+        <p>Hey! 👋</p>
+        <h1>I am <span>Dummy Developer</span></h1>
+        <p>I have 8+ years of experience working with different tech stacks. I’ve helped clients scale their businesses and build modern full-stack solutions.</p>
+        <button>Get Started →</button>
+
+        <p style="margin-top: 20px; font-size: 14px;">
+            ⭐ Top Rated Seller on Platforms (Dummy)
+        </p>
     </div>
-  </div>
+
+    <img src="https://picsum.photos/350/450" alt="Dummy Developer">
 </section>
+
+<!-- SKILLS -->
+<div class="skills">
+    <img src="https://cdn-icons-png.flaticon.com/512/919/919836.png">
+    <img src="https://cdn-icons-png.flaticon.com/512/732/732212.png">
+    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968350.png">
+    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png">
+    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968672.png">
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+    <h2>Things you should know before starting!</h2>
+
+    <div class="about-section">
+        <img src="https://picsum.photos/330/430" alt="About Developer">
+
+        <div class="stats">
+            <div class="stat-box">
+                <h3>1000+ Projects Completed</h3>
+                <p>Delivered full-stack apps, dashboards, automations, and web tools.</p>
+            </div>
+
+            <div class="stat-box">
+                <h3>9+ Years of Experience</h3>
+                <p>Worked with international clients across multiple domains.</p>
+            </div>
+
+            <div class="stat-box">
+                <h3>500+ Happy Clients</h3>
+                <p>Most clients return for iterations, improvements, and new projects.</p>
+            </div>
+
+            <button style="margin-top: 20px; background:#333;">Download CV</button>
+            <button style="margin-left: 10px; margin-top: 20px;">GitHub</button>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    © 2025 Dummy Developer — All Rights Reserved.
+</footer>
 
 <script>
-  // Example JavaScript functionality
-  document.querySelectorAll('nav a').forEach(link => {
-    link.addEventListener('click', () => {
-      alert(`Navigating to ${link.textContent}`);
+    // Optional JS for smooth scrolling
+    document.querySelectorAll("nav ul li a").forEach(link => {
+        link.addEventListener("click", e => {
+            e.preventDefault();
+            document.querySelector(link.getAttribute("href")).scrollIntoView({
+                behavior: "smooth"
+            });
+        });
     });
-  });
 </script>
-
 </body>
 </html>
