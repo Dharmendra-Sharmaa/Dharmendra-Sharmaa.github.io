@@ -1,22 +1,12 @@
-// Simple theme toggle: persists preference in localStorage
-const toggle = document.getElementById('themeToggle');
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-const saved = localStorage.getItem('theme');
-
-function applyTheme(theme) {
-  if (theme === 'light') {
-    document.documentElement.setAttribute('data-theme', 'light');
-    toggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
-  } else {
-    document.documentElement.removeAttribute('data-theme');
-    toggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
-  }
-}
-
-applyTheme(saved || (prefersDark ? 'dark' : 'light'));
-
-toggle.addEventListener('click', () => {
-  const now = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-  applyTheme(now);
-  localStorage.setItem('theme', now);
+// Mouse tilt effect
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const { offsetX, offsetY } = e;
+    const x = (offsetX / card.offsetWidth) * 30 - 15;
+    const y = (offsetY / card.offsetHeight) * 30 - 15;
+    card.style.transform = `rotateX(${y}deg) rotateY(${x}deg) scale(1.05)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'rotateX(0) rotateY(0) scale(1)';
+  });
 });
