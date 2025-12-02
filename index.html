@@ -2,534 +2,163 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dharmendra • Creative 3D Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Adward Allam - Portfolio</title>
   <style>
-    :root{
-      --bg:#0b0f14;
-      --fg:#e6eaf2;
-      --muted:#9aa4b2;
-      --accent:#62d4ff;
-      --accent-2:#9b6cff;
-      --card:#121722;
-      --glass:rgba(255,255,255,0.06);
-      --blur:20px;
-      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
     }
-
-    *{box-sizing:border-box}
-    html,body{
-      margin:0;
-      background:var(--bg);
-      color:var(--fg);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
-      scroll-behavior:smooth;
+    header {
+      background-color: #222;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-
-    /* Global layout */
-    header, section, footer{
-      padding: clamp(16px, 4vw, 48px);
-      position:relative;
+    nav a {
+      color: white;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: bold;
     }
-    a{color:var(--accent); text-decoration:none}
-    .max{
-      max-width: 1200px;
-      margin: 0 auto;
+    .social-icons img {
+      width: 24px;
+      margin-left: 10px;
     }
-
-    /* Navigation */
-    .nav{
-      position:fixed; top:0; left:0; right:0; z-index:1000;
-      backdrop-filter: blur(10px);
-      background: linear-gradient(180deg, rgba(10,12,18,0.75), rgba(10,12,18,0.35));
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+    .hero {
+      display: flex;
+      align-items: center;
+      padding: 2rem;
+      background-color: #fff;
     }
-    .nav .wrap{
-      display:flex; align-items:center; justify-content:space-between;
-    }
-    .brand{
-      font-weight:700; letter-spacing:0.3px;
-    }
-    .brand .dot{color:var(--accent)}
-    .links{
-      display:flex; gap: clamp(12px, 2vw, 28px);
-    }
-    .links a{
-      color:var(--fg);
-      opacity:0.9;
-      padding:10px 12px;
-      border-radius:10px;
-      transition: transform .2s ease, opacity .2s ease, background .2s ease;
-    }
-    .links a:hover{
-      opacity:1;
-      background:var(--glass);
-      transform: translateY(-2px);
-    }
-
-    /* Hero: 3D parallax scene */
-    .hero{
-      height: 100svh;
-      display:grid; place-items:center;
-      overflow:hidden;
-      padding-top: 96px; /* nav space */
-    }
-    .scene{
-      perspective: 1200px;
-      width: min(1100px, 92vw);
-      height: min(680px, 70vh);
-      position:relative;
-      transform-style: preserve-3d;
-    }
-    .layer{
-      position:absolute; inset:0;
-      transform-style: preserve-3d;
-      border-radius:24px;
-    }
-    .layer.bg{
-      background:
-        radial-gradient(1200px 600px at 10% 10%, rgba(98,212,255,0.12), transparent 60%),
-        radial-gradient(900px 500px at 90% 80%, rgba(155,108,255,0.12), transparent 60%),
-        linear-gradient(180deg, #0b0f14, #0a1017 60%, #0b0f14);
-      border:1px solid rgba(255,255,255,0.06);
-      box-shadow: var(--shadow);
-    }
-    .layer.grid::before{
-      content:"";
-      position:absolute; inset:0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
-      background-size: 40px 40px;
-      border-radius:inherit;
-      mix-blend-mode: soft-light;
-    }
-    .content{
-      position:absolute; inset:0;
-      display:flex; align-items:center; justify-content:center;
-      padding: clamp(20px, 5vw, 60px);
-      text-align:center;
-    }
-    .title{
-      font-size: clamp(28px, 6vw, 56px);
-      line-height:1.05;
-      margin:0;
-      letter-spacing: -0.5px;
-    }
-    .sub{
-      margin: 12px auto 22px;
-      max-width: 720px;
-      color:var(--muted);
-      font-size: clamp(14px, 2.6vw, 18px);
-    }
-    .cta{
-      display:flex; gap:12px; justify-content:center; flex-wrap:wrap;
-    }
-    .btn{
-      padding: 12px 18px;
-      border-radius: 12px;
-      border:1px solid rgba(255,255,255,0.12);
-      background: var(--glass);
-      color:var(--fg);
-      cursor:pointer;
-      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
-      will-change: transform;
-    }
-    .btn.primary{
-      background: linear-gradient(135deg, rgba(98,212,255,0.18), rgba(155,108,255,0.18));
-    }
-    .btn:hover{ transform: translateY(-2px) }
-    .btn.magnetic{ position:relative; overflow:hidden }
-
-    /* About section: glass panels */
-    .about{
-      margin-top: 40px;
-    }
-    .grid{
-      display:grid; gap: clamp(16px, 2.2vw, 28px);
-      grid-template-columns: repeat(12, 1fr);
-    }
-    .panel{
-      grid-column: span 6;
-      background: var(--glass);
-      backdrop-filter: blur(var(--blur));
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 18px;
-      padding: clamp(16px, 2.2vw, 28px);
-      box-shadow: var(--shadow);
-      transform: translateY(20px);
-      opacity:0;
-      transition: transform .6s cubic-bezier(.2,.8,.2,1), opacity .6s ease;
-    }
-    .panel.reveal{
-      transform: translateY(0);
-      opacity:1;
-    }
-    .panel h3{ margin-top:0 }
-    .skills{
-      display:flex; flex-wrap:wrap; gap:10px;
-    }
-    .chip{
-      padding:8px 12px;
-      background:#11161f;
-      border:1px solid rgba(255,255,255,0.08);
-      border-radius:10px;
-      color:var(--muted);
-      font-size:14px;
-    }
-
-    /* Projects: 3D tilt cards + horizontal carousel */
-    .projects{
-      margin-top:60px;
-    }
-    .row{
-      display:flex; gap: clamp(16px, 2vw, 24px);
-      overflow-x:auto;
-      padding-bottom: 12px;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-    }
-    .card{
-      flex: 0 0 320px;
-      height: 420px;
-      background: var(--card);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      padding: 16px;
-      scroll-snap-align: center;
-      position:relative;
-      transform-style: preserve-3d;
-      transition: transform .2s ease, box-shadow .2s ease;
-      will-change: transform;
-    }
-    .card:hover{ box-shadow: 0 18px 50px rgba(0,0,0,0.45) }
-    .thumb{
-      height: 55%;
-      border-radius: 14px;
-      background:
-        radial-gradient(400px 200px at 10% 10%, rgba(98,212,255,0.15), transparent 60%),
-        radial-gradient(350px 200px at 90% 80%, rgba(155,108,255,0.15), transparent 60%),
-        linear-gradient(135deg, #141b26, #0f1420);
-      border:1px solid rgba(255,255,255,0.08);
-    }
-    .card h4{ margin: 14px 0 8px }
-    .card p{ color:var(--muted); font-size:14px }
-    .tag{
-      position:absolute; top:18px; left:18px;
-      font-size:12px; padding:6px 10px;
-      background: rgba(98,212,255,0.14);
-      color: #b8ecff;
-      border: 1px solid rgba(98,212,255,0.4);
+    .hero img {
+      width: 300px;
       border-radius: 10px;
-      transform: translateZ(40px);
+      margin-right: 2rem;
     }
-
-    /* Contact */
-    .contact{
-      margin-top:60px;
+    .hero-text h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
     }
-    .contact .card{
-      width: 100%;
-      max-width: 680px;
-      height:auto;
+    .hero-text p {
+      margin: 0.5rem 0;
     }
-    .contact form{
-      display:grid; gap:12px;
+    .badges {
+      margin-top: 1rem;
     }
-    .input{
-      background:#11161f;
-      color:var(--fg);
-      border:1px solid rgba(255,255,255,0.08);
-      border-radius:12px;
-      padding:12px 14px;
-      font-size:16px;
+    .badge {
+      background-color: #eee;
+      padding: 0.5rem 1rem;
+      margin-right: 1rem;
+      border-radius: 5px;
+      display: inline-block;
     }
-    textarea.input{ min-height:120px; resize:vertical }
-
-    /* Footer */
-    footer{
-      margin-top:60px;
-      color:var(--muted);
-      border-top:1px solid rgba(255,255,255,0.06);
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+    .tech-icons img {
+      width: 40px;
+      margin: 10px;
     }
-
-    /* Responsive */
-    @media (max-width: 900px){
-      .panel{ grid-column: span 12 }
-      .card{ flex-basis: 80vw }
+    .section {
+      padding: 2rem;
+      background-color: #fff;
+      margin: 1rem 0;
     }
-
-    /* Subtle scroll progress */
-    .progress{
-      position: fixed;
-      left: 0; bottom: 0;
-      height: 3px; width: 0%;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      z-index: 1001;
-      box-shadow: 0 0 12px rgba(98,212,255,0.6);
+    .section h2 {
+      margin-bottom: 1rem;
+    }
+    .about img {
+      width: 200px;
+      border-radius: 10px;
+      margin-right: 2rem;
+    }
+    .about-content {
+      display: flex;
+      align-items: center;
+    }
+    .buttons a {
+      display: inline-block;
+      margin: 1rem 1rem 0 0;
+      padding: 0.5rem 1rem;
+      background-color: #222;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav class="nav">
-    <div class="max wrap">
-      <div class="brand">Dharmendra<span class="dot">•</span>Portfolio</div>
-      <div class="links">
-        <a href="#about">About</a>
-        <a href="#projects">Work</a>
-        <a href="#contact">Contact</a>
-        <a href="#top" class="btn magnetic">Back to top</a>
-      </div>
-    </div>
+<header>
+  <div>
+    <strong>Adward Allam</strong>
+  </div>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Testimonial</a>
+    <a href="#">Projects</a>
+    <a href="#">Contact</a>
   </nav>
+  <div class="social-icons">
+    <img src="https://via.placeholder.com/24?text=F" alt="Facebook"/>
+    <img src="https://via.placeholder.com/24?text=I" alt="Instagram"/>
+    <img src="https://via.placeholder.com/24?text=G" alt="GitHub"/>
+  </div>
+</header>
 
-  <!-- Hero -->
-  <header class="hero" id="top">
-    <div class="max scene" id="scene">
-      <div class="layer bg" data-depth="20"></div>
-      <div class="layer grid" data-depth="35"></div>
-      <div class="layer content" data-depth="60">
-        <div>
-          <h1 class="title">Immersive 3D portfolio for HTML • CSS • JavaScript</h1>
-          <p class="sub">Crafted with tactile tilt, parallax depth, scroll-triggered reveals, and touch-friendly motion. Built to impress—smooth, responsive, and delightful on every device.</p>
-          <div class="cta">
-            <a class="btn primary magnetic" href="#projects">View projects</a>
-            <a class="btn magnetic" href="#contact">Get in touch</a>
-          </div>
-        </div>
+<section class="hero">
+  <img src="https://via.placeholder.com/300x400?text=Adward" alt="Adward Allam"/>
+  <div class="hero-text">
+    <h1>Hey! 👋 I am Adward Allam</h1>
+    <p>I have an experience of over 8+ years of working on different stacks. I helped clients to get more than 50+ Million for their business.</p>
+    <button onclick="alert('Getting Started!')">Get Started</button>
+    <div class="badges">
+      <span class="badge">Upwork: 5.0 ★★★★★ Top Rated Seller</span>
+      <span class="badge">Fiverr: 5.0 ★★★★★ Top Rated Seller</span>
+    </div>
+    <div class="tech-icons">
+      <img src="https://via.placeholder.com/40?text=Mongo" alt="MongoDB"/>
+      <img src="https://via.placeholder.com/40?text=HTML" alt="HTML"/>
+      <img src="https://via.placeholder.com/40?text=Python" alt="Python"/>
+      <img src="https://via.placeholder.com/40?text=JS" alt="JavaScript"/>
+      <img src="https://via.placeholder.com/40?text=CSS" alt="CSS"/>
+      <img src="https://via.placeholder.com/40?text=Laravel" alt="Laravel"/>
+    </div>
+  </div>
+</section>
+
+<section class="section about">
+  <h2>About Me</h2>
+  <div class="about-content">
+    <img src="https://via.placeholder.com/200x250?text=Adward" alt="Adward"/>
+    <div>
+      <h3>Things you should know before starting!</h3>
+      <ul>
+        <li><strong>Education:</strong> Dummy University, B.Tech in Computer Science</li>
+        <li><strong>Experience:</strong> 1000+ Projects Completed, 9+ Years Of Experience, 500+ Happy Clients</li>
+        <li><strong>Interests:</strong> Coding, Design, AI, Teaching</li>
+      </ul>
+      <p>I have an experience of over 8+ years of working on different stacks. I helped clients to get more than 50+ Million for their business. (Repeated for demo)</p>
+      <div class="buttons">
+        <a href="#">Download CV</a>
+        <a href="#">GitHub</a>
       </div>
     </div>
-  </header>
+  </div>
+</section>
 
-  <!-- About -->
-  <section class="about">
-    <div class="max">
-      <div class="grid">
-        <div class="panel">
-          <h3>Who I am</h3>
-          <p>I design interactive web experiences with clean architecture, refined UI, and performance-first animations. The goal: make complex ideas feel simple and memorable.</p>
-          <div class="skills">
-            <span class="chip">HTML5</span><span class="chip">CSS3</span><span class="chip">JavaScript</span>
-            <span class="chip">Accessibility</span><span class="chip">Animations</span><span class="chip">Responsive</span>
-          </div>
-        </div>
-        <div class="panel">
-          <h3>What I value</h3>
-          <p>Clarity over clutter, motion with purpose, and experiences that invite play. Every detail earns its place—from micro-interactions to macro layout rhythm.</p>
-          <div class="skills">
-            <span class="chip">3D perspective</span><span class="chip">Smooth scroll</span><span class="chip">Touch gestures</span>
-            <span class="chip">Tactile UI</span><span class="chip">Parallax</span><span class="chip">Performance</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<script>
+  // Example JavaScript functionality
+  document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', () => {
+      alert(`Navigating to ${link.textContent}`);
+    });
+  });
+</script>
 
-  <!-- Projects -->
-  <section class="projects" id="projects">
-    <div class="max">
-      <h2 style="margin-bottom:14px">Selected work</h2>
-      <p class="sub">Cards tilt with your cursor, layers float on scroll, and the carousel glides with a simple swipe.</p>
-      <div class="row" id="carousel">
-        <article class="card tilt" tabindex="0">
-          <span class="tag">UI • Motion</span>
-          <div class="thumb"></div>
-          <h4>Parallax landing</h4>
-          <p>Hero depth using perspective and scroll-driven transforms. No libraries—just elegant math and restraint.</p>
-        </article>
-        <article class="card tilt" tabindex="0">
-          <span class="tag">Web • 3D</span>
-          <div class="thumb"></div>
-          <h4>Interactive product</h4>
-          <p>Magnetic CTAs and tactile hover states make exploration feel satisfying and precise.</p>
-        </article>
-        <article class="card tilt" tabindex="0">
-          <span class="tag">Design • Code</span>
-          <div class="thumb"></div>
-          <h4>Micro-interactions</h4>
-          <p>Meaningful motion: reveals, focus states, and handoff-friendly implementation.</p>
-        </article>
-        <article class="card tilt" tabindex="0">
-          <span class="tag">Performance</span>
-          <div class="thumb"></div>
-          <h4>Silky smooth UX</h4>
-          <p>GPU-accelerated transforms, passive events, and careful paint avoidance.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section class="contact" id="contact">
-    <div class="max">
-      <h2 style="margin-bottom:14px">Let’s build something memorable</h2>
-      <p class="sub">I’m available for collaborations, product UI, and educational experiences.</p>
-
-      <article class="card">
-        <form>
-          <input class="input" type="text" placeholder="Your name" required />
-          <input class="input" type="email" placeholder="Your email" required />
-          <textarea class="input" placeholder="Tell me about your idea..." required></textarea>
-          <button type="submit" class="btn primary magnetic">Send message</button>
-        </form>
-      </article>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="max">
-      <p>© Dharmendra. Built with HTML, CSS, and JavaScript — immersive by design.</p>
-    </div>
-  </footer>
-
-  <!-- Scroll progress bar -->
-  <div class="progress" id="progress"></div>
-
-  <script>
-    /* ========== 1) 3D hero parallax (mouse + device tilt) ========== */
-    (function(){
-      const scene = document.getElementById('scene');
-      if(!scene) return;
-      const layers = Array.from(scene.querySelectorAll('[data-depth]'));
-
-      const clamp = (n,min,max)=>Math.max(min,Math.min(max,n));
-
-      function applyParallax(xPercent, yPercent){
-        layers.forEach(layer=>{
-          const depth = parseFloat(layer.dataset.depth || 0);
-          const rx = (yPercent - 50) / 50 * depth; // rotateX
-          const ry = (xPercent - 50) / 50 * -depth; // rotateY
-          const tz = depth * 0.6; // subtle translateZ
-
-          layer.style.transform = `
-            translateZ(${tz}px)
-            rotateX(${clamp(rx,-12,12)}deg)
-            rotateY(${clamp(ry,-12,12)}deg)
-          `;
-        });
-      }
-
-      // Mouse move
-      scene.addEventListener('mousemove', (e)=>{
-        const rect = scene.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        applyParallax(x, y);
-      }, { passive: true });
-
-      // Device tilt (mobile)
-      function onTilt(e){
-        const x = clamp(50 + (e.gamma || 0), 0, 100); // left-right
-        const y = clamp(50 + (e.beta || 0), 0, 100);  // front-back
-        applyParallax(x, y);
-      }
-      if (window.DeviceOrientationEvent) {
-        window.addEventListener('deviceorientation', onTilt, { passive: true });
-      }
-    })();
-
-    /* ========== 2) Reveal panels on scroll ========== */
-    (function(){
-      const panels = document.querySelectorAll('.panel');
-      const io = new IntersectionObserver(entries=>{
-        entries.forEach(entry=>{
-          if(entry.isIntersecting){
-            entry.target.classList.add('reveal');
-            io.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.15 });
-      panels.forEach(p => io.observe(p));
-    })();
-
-    /* ========== 3) 3D tilt cards (mouse + keyboard focus) ========== */
-    (function(){
-      const cards = document.querySelectorAll('.tilt');
-      cards.forEach(card=>{
-        const rect = ()=>card.getBoundingClientRect();
-        const tilt = (x, y)=>{
-          const r = rect();
-          const relX = (x - r.left) / r.width;
-          const relY = (y - r.top) / r.height;
-          const rotY = (relX - 0.5) * 16; // left-right
-          const rotX = (0.5 - relY) * 16; // up-down
-          card.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(20px)`;
-        };
-        card.addEventListener('mousemove', (e)=> tilt(e.clientX, e.clientY), { passive:true });
-        card.addEventListener('mouseleave', ()=> card.style.transform = 'rotateX(0) rotateY(0) translateZ(0)');
-        // Keyboard accessible flair
-        card.addEventListener('focus', ()=> card.style.transform = 'rotateX(2deg) rotateY(-2deg) translateZ(18px)');
-        card.addEventListener('blur',  ()=> card.style.transform = 'rotateX(0) rotateY(0) translateZ(0)');
-      });
-    })();
-
-    /* ========== 4) Magnetic buttons (tactile hover) ========== */
-    (function(){
-      const magnets = document.querySelectorAll('.magnetic');
-      magnets.forEach(el=>{
-        const strength = 18;
-        el.addEventListener('mousemove', e=>{
-          const r = el.getBoundingClientRect();
-          const x = ((e.clientX - r.left) / r.width - 0.5) * strength;
-          const y = ((e.clientY - r.top) / r.height - 0.5) * strength;
-          el.style.transform = `translate(${x}px, ${y}px)`;
-        }, { passive:true });
-        el.addEventListener('mouseleave', ()=> el.style.transform = 'translate(0,0)');
-      });
-    })();
-
-    /* ========== 5) Touch-friendly horizontal carousel swipe ========== */
-    (function(){
-      const wrap = document.getElementById('carousel');
-      if(!wrap) return;
-      let startX = 0, scrollLeft = 0, isDown = false;
-
-      const start = (x)=>{
-        isDown = true; startX = x; scrollLeft = wrap.scrollLeft;
-      };
-      const move = (x)=>{
-        if(!isDown) return;
-        const dist = (x - startX);
-        wrap.scrollLeft = scrollLeft - dist;
-      };
-      const end = ()=> isDown = false;
-
-      wrap.addEventListener('mousedown', e=> start(e.pageX));
-      window.addEventListener('mousemove', e=> move(e.pageX));
-      window.addEventListener('mouseup', end);
-
-      wrap.addEventListener('touchstart', e=> start(e.touches[0].pageX), { passive:true });
-      window.addEventListener('touchmove', e=> move(e.touches[0].pageX), { passive:true });
-      window.addEventListener('touchend', end);
-    })();
-
-    /* ========== 6) Scroll progress bar ========== */
-    (function(){
-      const bar = document.getElementById('progress');
-      const onScroll = ()=>{
-        const h = document.documentElement;
-        const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
-        bar.style.width = `${Math.max(0, Math.min(1, scrolled)) * 100}%`;
-      };
-      document.addEventListener('scroll', onScroll, { passive:true });
-      onScroll();
-    })();
-
-    /* ========== 7) Basic form handler (demo) ========== */
-    (function(){
-      const form = document.querySelector('form');
-      if(!form) return;
-      form.addEventListener('submit', (e)=>{
-        e.preventDefault();
-        alert('Thanks for reaching out! I’ll reply soon.');
-        form.reset();
-      });
-    })();
-  </script>
 </body>
 </html>
